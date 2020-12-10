@@ -1,0 +1,25 @@
+name: build headless
+
+on:
+  push:
+    branches: [ mychoir-master ]
+  pull_request:
+    branches: [ mychoir-master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: info
+      run: env && pwd && id &&  ls -la
+    - name: setup
+      run: sudo apt-get install build-essential qt5-qmake qtdeclarative5-dev qt5-default qttools5-dev-tools libjack-jackd2-dev
+    - name: configure
+      run: qmake "CONFIG+=nosound headless" Jamulus.pro
+    - name: make clean
+      run: make clean
+    - name: make
+      run: make
