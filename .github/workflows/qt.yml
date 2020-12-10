@@ -23,3 +23,9 @@ jobs:
       run: make clean
     - name: make
       run: make
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: Jamulus
+        path: Jamulus
+
